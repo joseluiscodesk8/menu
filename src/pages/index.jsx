@@ -1,4 +1,4 @@
-import { useMenu } from "../Context/MenuContext";
+import { useMenu } from "../context/MenuContext";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";

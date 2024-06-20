@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useMenu } from "../Context/MenuContext";
+import { useMenu } from "../context/MenuContext";
 
 import menu from "../data/menu";
 import styles from "../styles/index.module.scss";
