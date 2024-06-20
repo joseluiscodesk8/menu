@@ -1,0 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  display: grid;
+  place-content: center;
+  margin: 20px auto;
+  width: 150px;
+  height: 40px;
+  border-radius: 50px;
+  background: transparent;
+  border: 1px solid #5fa039;
+}

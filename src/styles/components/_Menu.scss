@@ -1,0 +1,22 @@
+.Menu {
+  margin: auto;
+  width: 80%;
+  height: 400px;
+
+  & header {
+    height: 90%;
+    border-radius: 15px;
+    box-shadow: 0 0 5px #000;
+    overflow: hidden;
+
+    & section {
+      height: 350px;
+      background: #fff;
+
+      & img {
+        width: 100%;
+        border-radius: 15px;
+      }
+    }
+  }
+}

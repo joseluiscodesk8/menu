@@ -1,0 +1,36 @@
+.Main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto;
+  width: 90%;
+  height: 380px;
+  box-shadow: 0 0 5px #5fa039;
+  //   border: 1px solid #fdaf00;
+  border-radius: 15px;
+
+  & header {
+    margin: auto;
+    width: 90%;
+    // border: 1px solid #00fdbe;
+
+    & section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow: hidden;
+    }
+  }
+}
+
+.MenuButton {
+  width: 150px;
+  margin: auto;
+  & button {
+    width: 150px;
+    height: 40px;
+    border-radius: 50px;
+    background: transparent;
+    border-color: #5fa039;
+  }
+}
