@@ -1,2 +1,19 @@
 @use './components/AdminPage';
 @use './components/Menu';
+
+.OrderControls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+
+    button {
+      margin: 0 10px;
+    }
+
+    span {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 0 10px;
+    }
+  }

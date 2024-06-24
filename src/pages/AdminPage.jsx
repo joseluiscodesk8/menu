@@ -14,7 +14,6 @@ import { EffectCoverflow } from "swiper/modules";
 
 const AdminPage = () => {
   const { addToMenu, removeFromMenu, menuItems } = useMenu();
-  const [currentPage, setCurrentPage] = useState(1);
   const [activeIndex, setActiveIndex] = useState(0);
   const imagesToShow = menu.items;
   const blurDataURL = menu.image;
@@ -79,7 +78,6 @@ const AdminPage = () => {
                     width={200}
                     height={200}
                     lazy="loading"
-                    // placeholder="blur"
                     blurDataURL={blurDataURL}
                   />
                   <h3>{item.nombre}</h3>
