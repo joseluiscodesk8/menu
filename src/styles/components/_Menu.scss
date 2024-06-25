@@ -20,9 +20,24 @@
     }
   }
 
-  & .Counter {
+
+  & .OrderControls {
     display: flex;
-    justify-content: space-between;
-    border: 1px solid;
+    justify-content: center;
+    align-items: center;
+   margin: 20px auto;
+
+    button {
+      width: 25px;
+      height: 25px;
+      margin: 0 10px;
+      border-radius: 15px;
+    }
+
+    span {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 0 10px;
+    }
   }
 }

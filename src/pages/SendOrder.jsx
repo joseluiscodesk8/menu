@@ -1,11 +1,25 @@
+import { useState } from 'react';
 import { useMenu } from "../context/MenuContext";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 
+import styles from "../styles/index.module.scss"
 
 const SendOrder = () => {
-  const { orderItems, addToOrder, removeFromOrder } = useMenu();
+  const { orderItems, addToOrder, removeFromOrder, addToKitchen } = useMenu();
+  const [orderNumber, setOrderNumber] = useState('');
+  const [orderSent, setOrderSent] = useState(false);
+
+  const handleSendOrder = () => {
+    if (!orderNumber) {
+      alert('Please enter an order number');
+      return;
+    }
+    addToKitchen(orderNumber);
+    setOrderSent(true);
+    setOrderNumber('');
+  };
 
   return (
     <>
@@ -30,20 +44,29 @@ const SendOrder = () => {
               />
               <p>{item.name}</p>
               <p>{item.price} $</p>
-              <p>Quantity: {item.quantity}</p>
-              <button onClick={() => addToOrder(item)}>+</button>
-              <button onClick={() => removeFromOrder(item)}>-</button>
+             <di className={styles.orderContainer}>
+             <button  className={styles.sendOrder} onClick={() => addToOrder(item)}>+</button>
+              <p>{item.quantity}</p>
+              <button  className={styles.sendOrder} onClick={() => removeFromOrder(item)}>-</button>
+             </di>
             </div>
           ))
         )}
+        <div>
+          <input 
+            type="text" 
+            value={orderNumber}
+            onChange={(e) => setOrderNumber(e.target.value)}
+            placeholder="Enter order number"
+          />
+          <button onClick={handleSendOrder}>Enviar Orden</button>
+        </div>
+        {orderSent && <p>Orden enviada</p>}
       </main>
-      <Link href={"/"}>Back to Menu</Link>
+      <Link href={"/Kitchen"}>Kitchen</Link>
     </>
   );
 };
 
 export default SendOrder;
 
-
-
-  

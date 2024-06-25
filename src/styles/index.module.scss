@@ -1,19 +1,16 @@
 @use './components/AdminPage';
 @use './components/Menu';
 
-.OrderControls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-   
 
-    button {
-      margin: 0 10px;
-    }
+.orderContainer {
+  display: flex;
 
-    span {
-      font-size: 18px;
-      font-weight: bold;
-      margin: 0 10px;
-    }
+  & .sendOrder {
+    width: 25px;
+        height: 25px;
+        margin: 0 10px;
+        border-radius: 15px;
   }
+
+}
+
