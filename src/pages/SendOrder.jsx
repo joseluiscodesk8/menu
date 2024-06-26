@@ -4,7 +4,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 
-import styles from "../styles/index.module.scss"
+import styles from "../styles/index.module.scss";
 
 const SendOrder = () => {
   const { orderItems, addToOrder, removeFromOrder, addToKitchen } = useMenu();
@@ -12,8 +12,9 @@ const SendOrder = () => {
   const [orderSent, setOrderSent] = useState(false);
 
   const handleSendOrder = () => {
-    if (!orderNumber) {
-      alert('Please enter an order number');
+    const orderNum = parseInt(orderNumber, 10);
+    if (!orderNumber || isNaN(orderNum) || orderNum < 1 || orderNum > 14) {
+      alert('Please enter a valid order number between 1 and 14');
       return;
     }
     addToKitchen(orderNumber);
@@ -44,20 +45,22 @@ const SendOrder = () => {
               />
               <p>{item.name}</p>
               <p>{item.price} $</p>
-             <di className={styles.orderContainer}>
-             <button  className={styles.sendOrder} onClick={() => addToOrder(item)}>+</button>
-              <p>{item.quantity}</p>
-              <button  className={styles.sendOrder} onClick={() => removeFromOrder(item)}>-</button>
-             </di>
+              <div className={styles.orderContainer}>
+                <button className={styles.sendOrder} onClick={() => addToOrder(item)}>+</button>
+                <p>{item.quantity}</p>
+                <button className={styles.sendOrder} onClick={() => removeFromOrder(item)}>-</button>
+              </div>
             </div>
           ))
         )}
         <div>
           <input 
-            type="text" 
+            type="number"
             value={orderNumber}
             onChange={(e) => setOrderNumber(e.target.value)}
             placeholder="Enter order number"
+            min="1"
+            max="14"
           />
           <button onClick={handleSendOrder}>Enviar Orden</button>
         </div>
@@ -69,4 +72,3 @@ const SendOrder = () => {
 };
 
 export default SendOrder;
-

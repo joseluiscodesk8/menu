@@ -14,3 +14,21 @@
 
 }
 
+.kitchenContainer {
+  width: 60%;
+  height: 250px;
+  overflow: hidden;
+  border: 1px solid;
+
+  & section {
+    display: flex;
+    justify-content: space-evenly;
+    background: #1416;
+    border: 1px solid #ae1254;
+  }
+
+  & .itemsContainer {
+    display: flex;
+    border: 1px solid #1416;
+  }
+}
