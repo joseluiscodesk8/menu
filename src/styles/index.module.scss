@@ -1,17 +1,64 @@
-@use './components/AdminPage';
-@use './components/Menu';
+@use "./components/AdminPage";
+@use "./components/Menu";
 
+.sendOrder {
+  & header {
+    width: 290px;
+    margin: auto;
+    padding: 1%;
 
-.orderContainer {
-  display: flex;
+    & section {
+      display: flex;
 
-  & .sendOrder {
-    width: 25px;
-        height: 25px;
-        margin: 0 10px;
-        border-radius: 15px;
+      & .textContainer {
+        width: 120px;
+        text-align: center;
+        padding: 2%;
+        line-height: 20px;
+
+        & p {
+          font-size: 1.2rem;
+          font-weight: 600;
+        }
+      }
+
+      & .orderContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 70px;
+
+        & .sendOrder {
+          width: 25px;
+          height: 25px;
+          margin: 0 10px;
+          border-radius: 15px;
+        }
+
+        & p {
+          font-size: 1.2rem;
+        }
+      }
+    }
   }
+  & h1, h2 {
+    margin: 20px auto;
+    text-align: center;
+  }
+  & aside {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 150px;
+    height: 80px;
+    padding: 2%;
+    margin: 20px auto;
 
+    & input {
+      text-align: center;
+    }
+  }
 }
 
 .kitchenContainer {
