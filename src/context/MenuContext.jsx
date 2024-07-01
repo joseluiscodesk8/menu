@@ -105,10 +105,10 @@ export const MenuProvider = ({ children }) => {
     localStorage.removeItem('orderItems');
   };
 
-  const removeFromKitchen = (orderNumber) => {
+  const removeOrderFromKitchen = (section, orderNumber) => {
     const updatedKitchenOrders = { ...kitchenOrders };
-    if (updatedKitchenOrders[orderNumber]) {
-      delete updatedKitchenOrders[orderNumber];
+    if (updatedKitchenOrders[section]) {
+      updatedKitchenOrders[section] = updatedKitchenOrders[section].filter(order => order.orderNumber !== orderNumber);
       setKitchenOrders(updatedKitchenOrders);
       localStorage.setItem('kitchenOrders', JSON.stringify(updatedKitchenOrders));
     }
@@ -117,7 +117,7 @@ export const MenuProvider = ({ children }) => {
   const menuCount = menuItems.length;
 
   return (
-    <MenuContext.Provider value={{ menuItems, addToMenu, removeFromMenu, addToOrder, removeFromOrder, orderItems, menuCount, addToKitchen, kitchenOrders, removeFromKitchen  }}>
+    <MenuContext.Provider value={{ menuItems, addToMenu, removeFromMenu, addToOrder, removeFromOrder, orderItems, menuCount, addToKitchen, kitchenOrders, removeOrderFromKitchen  }}>
       {children}
     </MenuContext.Provider>
   );

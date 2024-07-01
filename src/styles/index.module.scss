@@ -61,20 +61,60 @@
   }
 }
 
+.titulo {
+  text-align: center;
+  margin: 20px auto;
+}
+
 .kitchenContainer {
-  height: 250px;
-  overflow: hidden;
-  border: 1px solid;
+  height: 80vh;
 
   & section {
     display: flex;
     justify-content: space-evenly;
-    background: #1416;
-    border: 1px solid #ae1254;
+    flex-wrap: wrap;
+    padding: 1%;
+    gap: 10px;
+
+    & button {
+      width: 120px;
+      height: 35px;
+      border-radius: 15px;
+      box-shadow: inset 0 0 5px #000;
+      background: transparent;
+      transition: .3s ease-in-out;
+      font-size: .9rem;
+      letter-spacing: 2px;
+      font-family: monospace;
+      border: none;
+
+      &:focus {
+        background: #0ceed0;
+        box-shadow: 0 0 3px #000;
+      }
+
+      &:active {
+        scale: .8;
+      }
+    }
   }
 
   & .itemsContainer {
     display: flex;
-    border: 1px solid #1416;
+    height: 100%;
+    padding: 1%;
+    gap: 10px;
+    overflow: hidden;
+
+    & .items {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      padding: 1%;
+      width: 40%;
+      height: 50%;
+      box-shadow: inset 0 0 2px #000;
+      border-radius: 15px;
+    }
   }
 }
