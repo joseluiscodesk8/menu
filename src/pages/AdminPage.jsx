@@ -16,6 +16,12 @@ const AdminPage = ({ menuItems }) => {
   const handleAddOrRemoveFromMenu = useCallback(
     (index) => {
       const currentItem = menuItems[index];
+
+      if (!currentItem) {
+        console.error('Current item is undefined at index', index);
+        return;
+      }
+      
       const itemInMenu = contextMenuItems.find(
         (menuItem) =>
           menuItem.id === currentItem.id && menuItem.origin === "/AdminPage"
