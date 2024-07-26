@@ -3,25 +3,20 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useMenu } from "../context/MenuContext";
-
-import menu from "../data/menu";
 import styles from "../styles/index.module.scss";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import { EffectCoverflow } from "swiper/modules";
 
-const AdminPage = () => {
-  const { addToMenu, removeFromMenu, menuItems } = useMenu();
+const AdminPage = ({ menuItems }) => {
+  const { addToMenu, removeFromMenu, menuItems: contextMenuItems } = useMenu();
   const [activeIndex, setActiveIndex] = useState(0);
-  const imagesToShow = menu.items;
-  const blurDataURL = menu.image;
 
   const handleAddOrRemoveFromMenu = useCallback(
     (index) => {
-      const currentItem = imagesToShow[index];
-      const itemInMenu = menuItems.find(
+      const currentItem = menuItems[index];
+      const itemInMenu = contextMenuItems.find(
         (menuItem) =>
           menuItem.id === currentItem.id && menuItem.origin === "/AdminPage"
       );
@@ -42,7 +37,7 @@ const AdminPage = () => {
         });
       }
     },
-    [addToMenu, removeFromMenu, menuItems, imagesToShow]
+    [addToMenu, removeFromMenu, contextMenuItems, menuItems]
   );
 
   return (
@@ -69,7 +64,7 @@ const AdminPage = () => {
             onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)} // Actualizar el índice activo
             modules={[EffectCoverflow]}
           >
-            {imagesToShow.map((item, index) => (
+            {menuItems.map((item, index) => (
               <SwiperSlide key={index}>
                 <section>
                   <Image
@@ -78,7 +73,6 @@ const AdminPage = () => {
                     width={200}
                     height={200}
                     lazy="loading"
-                    blurDataURL={blurDataURL}
                   />
                   <h3>{item.nombre}</h3>
                   <h3>{item.precio} $</h3>
@@ -91,9 +85,9 @@ const AdminPage = () => {
       </main>
       <div className={styles.MenuButton}>
         <button onClick={() => handleAddOrRemoveFromMenu(activeIndex)}>
-          {menuItems.some(
+          {contextMenuItems.some(
             (menuItem) =>
-              menuItem.id === imagesToShow[activeIndex].id &&
+              menuItem.id === menuItems[activeIndex].id &&
               menuItem.origin === "/AdminPage"
           )
             ? "Remover del Menu"
@@ -104,5 +98,27 @@ const AdminPage = () => {
     </>
   );
 };
+
+export async function getServerSideProps() {
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/menu`); // Usa la URL de tu endpoint real
+    if (!response.ok) {
+      throw new Error('Failed to fetch');
+    }
+    const data = await response.json();
+    return {
+      props: {
+        menuItems: data,
+      },
+    };
+  } catch (err) {
+    return {
+      props: {
+        menuItems: [],
+        error: err.message,
+      },
+    };
+  }
+}
 
 export default AdminPage;

@@ -39,7 +39,4 @@ const menu = {
   ]
 };
 
-export default menu;
-
-
-
+module.exports = menu;

@@ -1,3 +1,4 @@
+// pages/SendOrder.jsx
 import { useState, useMemo } from "react";
 import { useMenu } from "../context/MenuContext";
 import Head from "next/head";
@@ -7,19 +8,41 @@ import Link from "next/link";
 import styles from "../styles/index.module.scss";
 
 const SendOrder = () => {
-  const { orderItems, addToOrder, removeFromOrder, addToKitchen } = useMenu();
+  const { orderItems, addToOrder, removeFromOrder } = useMenu();
   const [orderNumber, setOrderNumber] = useState("");
   const [orderSent, setOrderSent] = useState(false);
 
-  const handleSendOrder = () => {
+  const handleSendOrder = async () => {
     const orderNum = parseInt(orderNumber, 10);
     if (!orderNumber || isNaN(orderNum) || orderNum < 1 || orderNum > 14) {
       alert("Please enter a valid order number between 1 and 14");
       return;
     }
-    addToKitchen(orderNumber);
-    setOrderSent(true);
-    setOrderNumber("");
+  
+    try {
+      const response = await fetch('/api/send-order', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          orderItems,
+          tableNumber: orderNumber,
+        }),
+      });
+  
+      const data = await response.json();
+      if (response.ok) {
+        setOrderSent(true);
+        setOrderNumber("");
+        // Optionally, clear the orderItems or handle post-submit actions here
+      } else {
+        alert(data.error || 'Error sending order');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred while sending the order');
+    }
   };
 
   const calculateTotal = () => {
