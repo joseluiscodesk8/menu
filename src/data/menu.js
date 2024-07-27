@@ -5,7 +5,7 @@ const menu = {
       "id": 1,
       "imagen": "https://www.oliveradatenea.com/wp-content/uploads/2023/06/Sushi-rolls-de-salmon-y-Olivada-Olivera-dAtenea.jpg",
       "nombre": "Sashimi de Salmón",
-      "precio": "21.500",
+      "precio": "21.000",
       "descripcion": "Finas lonchas de salmón fresco cortadas a mano."
     },
     {
