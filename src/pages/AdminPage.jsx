@@ -21,7 +21,7 @@ const AdminPage = ({ menuItems }) => {
         console.error('Current item is undefined at index', index);
         return;
       }
-      
+
       const itemInMenu = contextMenuItems.find(
         (menuItem) =>
           menuItem.id === currentItem.id && menuItem.origin === "/AdminPage"
@@ -78,7 +78,7 @@ const AdminPage = ({ menuItems }) => {
                     alt={`Imagen ${index + 1}`}
                     width={200}
                     height={200}
-                    lazy="loading"
+                    loading="lazy" // Cambié `lazy="loading"` a `loading="lazy"`
                   />
                   <h3>{item.nombre}</h3>
                   <h3>{item.precio} $</h3>
@@ -90,15 +90,17 @@ const AdminPage = ({ menuItems }) => {
         </header>
       </main>
       <div className={styles.MenuButton}>
-        <button onClick={() => handleAddOrRemoveFromMenu(activeIndex)}>
-          {contextMenuItems.some(
-            (menuItem) =>
-              menuItem.id === menuItems[activeIndex].id &&
-              menuItem.origin === "/AdminPage"
-          )
-            ? "Remover del Menu"
-            : "Agregar al Menu"}
-        </button>
+        {menuItems.length > 0 && (
+          <button onClick={() => handleAddOrRemoveFromMenu(activeIndex)}>
+            {contextMenuItems.some(
+              (menuItem) =>
+                menuItem.id === menuItems[activeIndex]?.id &&
+                menuItem.origin === "/AdminPage"
+            )
+              ? "Remover del Menu"
+              : "Agregar al Menu"}
+          </button>
+        )}
       </div>
       <Link href={"/"}>Menu</Link>
     </>
@@ -107,7 +109,7 @@ const AdminPage = ({ menuItems }) => {
 
 export async function getServerSideProps() {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/menu`); // Usa la URL de tu endpoint real
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/menu`);
     if (!response.ok) {
       throw new Error('Failed to fetch');
     }
