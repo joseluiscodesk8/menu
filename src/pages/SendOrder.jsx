@@ -19,7 +19,7 @@ const SendOrder = () => {
     }
   
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/send-order`, {
+      const response = await fetch(`/api/send-order`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

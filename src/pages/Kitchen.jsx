@@ -17,7 +17,7 @@ const Kitchen = () => {
     if (selectedSection) {
       const fetchOrders = async () => {
         try {
-          const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/kitchen-orders?section=${selectedSection}`);
+          const response = await fetch(`/api/kitchen-orders?section=${selectedSection}`);
           if (!response.ok) {
             throw new Error('Error al obtener las órdenes');
           }
