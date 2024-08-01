@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useMenu } from "../context/MenuContext";
 import Link from "next/link";
 import Head from "next/head";
+
 import { motion, AnimatePresence } from 'framer-motion';
 
+
+import { useMenu } from "../context/MenuContext";
 import styles from "../styles/index.module.scss";
 
 const Kitchen = () => {

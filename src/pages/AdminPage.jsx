@@ -2,16 +2,21 @@ import { useCallback, useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useMenu } from "../context/MenuContext";
-import styles from "../styles/index.module.scss";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import { EffectCoverflow } from "swiper/modules";
 
+import { useMenu } from "../context/MenuContext";
+import styles from "../styles/index.module.scss";
+
 const AdminPage = ({ menuItems }) => {
   const { addToMenu, removeFromMenu, menuItems: contextMenuItems } = useMenu();
   const [activeIndex, setActiveIndex] = useState(0);
+
+  console.log('Menu Items received from server:', menuItems);
+  console.log('Current items in menu context:', contextMenuItems);
 
   const handleAddOrRemoveFromMenu = useCallback(
     (index) => {
@@ -22,17 +27,21 @@ const AdminPage = ({ menuItems }) => {
         return;
       }
 
+      console.log('Handling menu item at index:', index, 'Item:', currentItem);
+
       const itemInMenu = contextMenuItems.find(
         (menuItem) =>
           menuItem.id === currentItem.id && menuItem.origin === "/AdminPage"
       );
 
       if (itemInMenu) {
+        console.log('Item already in menu, removing:', currentItem);
         removeFromMenu({
           id: currentItem.id,
           origin: "/AdminPage",
         });
       } else {
+        console.log('Item not in menu, adding:', currentItem);
         addToMenu({
           id: currentItem.id,
           image: currentItem.imagen,
@@ -78,7 +87,7 @@ const AdminPage = ({ menuItems }) => {
                     alt={`Imagen ${index + 1}`}
                     width={200}
                     height={200}
-                    loading="lazy" // Cambié `lazy="loading"` a `loading="lazy"`
+                    loading="lazy"
                   />
                   <h3>{item.nombre}</h3>
                   <h3>{item.precio} $</h3>
@@ -109,17 +118,24 @@ const AdminPage = ({ menuItems }) => {
 
 export async function getServerSideProps() {
   try {
+    console.log('Fetching menu items from API...');
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/menu`);
+    
     if (!response.ok) {
+      console.error('Failed to fetch menu items:', response.statusText);
       throw new Error('Failed to fetch');
     }
+    
     const data = await response.json();
+    console.log('Menu items fetched successfully:', data);
+    
     return {
       props: {
         menuItems: data,
       },
     };
   } catch (err) {
+    console.error('Error in getServerSideProps:', err.message);
     return {
       props: {
         menuItems: [],
